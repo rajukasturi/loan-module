@@ -1,0 +1,72 @@
+{
+  "info": {
+    "_postman_id": "af358108-5154-4fd6-8134-95d6c99dd571",
+    "name": "Loan Module",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "14099010"
+  },
+  "item": [
+    {
+      "name": "Home Loan - 200 Valid Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"fullName\": \"Raju Kasturi\",\r\n    \"panNumber\": \"XZDEF1234F\",\r\n    \"monthlyIncome\": \"25000\",\r\n    \"requestedAmount\": \"375000\",\r\n    \"loanType\": \"HOME_LOAN\",\r\n    \"tenureInMonths\": \"36\",\r\n    \"propertyDetails\": {\r\n        \"propertyValue\": \"800000\",\r\n        \"propertyAddress\": \"Bhiwandi\",\r\n        \"isSelfOccupied\": false\r\n    },\r\n    \"employmentDetails\": {\r\n        \"employmentType\": \"SALARIED\",\r\n        \"companyName\": \"HDFC\",\r\n        \"yearsOfService\": 5\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/loans/apply",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "loans",
+            "apply"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Home Loan - 400 Invalid Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"fullName\": \"Raju Kasturi\",\r\n    \"panNumber\": \"ABCDE1234F\",\r\n    \"monthlyIncome\": \"25000\",\r\n    \"requestedAmount\": \"400000\",\r\n    \"loanType\": \"HOME_LOAN\",\r\n    \"tenureInMonths\": \"36\",\r\n    \"propertyDetails\": {\r\n        \"propertyValue\": \"800000\",\r\n        \"propertyAddress\": \"Bhiwandi\",\r\n        \"isSelfOccupied\": false\r\n    },\r\n    \"employmentDetails\": {\r\n        \"employmentType\": \"SALARIED\",\r\n        \"companyName\": \"HDFC\",\r\n        \"yearsOfService\": 5\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/loans/apply",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "loans",
+            "apply"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
