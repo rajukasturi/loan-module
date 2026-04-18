@@ -1,0 +1,54 @@
+2026-04-18 20:30:38 [main] INFO  c.d.l.LoanModuleApplicationTests - Starting LoanModuleApplicationTests using Java 21.0.10 with PID 19976 (started by KASTURI in E:\Softwares\workspace\loan-module)
+2026-04-18 20:30:38 [main] DEBUG c.d.l.LoanModuleApplicationTests - Running with Spring Boot v3.5.13, Spring v6.2.17
+2026-04-18 20:30:38 [main] INFO  c.d.l.LoanModuleApplicationTests - The following 1 profile is active: "test"
+2026-04-18 20:30:43 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-18 20:30:43 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.45.Final
+2026-04-18 20:30:43 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-18 20:30:44 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-18 20:30:44 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-18 20:30:45 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-18 20:30:47 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-18 20:30:49 [main] INFO  c.d.l.LoanModuleApplicationTests - Started LoanModuleApplicationTests in 11.906 seconds (process running for 13.436)
+2026-04-18 20:31:10 [main] INFO  c.d.l.LoanModuleApplicationTests - Starting LoanModuleApplicationTests using Java 21.0.10 with PID 24220 (started by KASTURI in E:\Softwares\workspace\loan-module)
+2026-04-18 20:31:10 [main] DEBUG c.d.l.LoanModuleApplicationTests - Running with Spring Boot v3.5.13, Spring v6.2.17
+2026-04-18 20:31:10 [main] INFO  c.d.l.LoanModuleApplicationTests - The following 1 profile is active: "test"
+2026-04-18 20:31:14 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-18 20:31:14 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.45.Final
+2026-04-18 20:31:14 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-18 20:31:15 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-18 20:31:15 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-18 20:31:16 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-18 20:31:18 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-18 20:31:20 [main] INFO  c.d.l.LoanModuleApplicationTests - Started LoanModuleApplicationTests in 10.787 seconds (process running for 12.201)
+2026-04-18 20:31:41 [main] INFO  c.d.l.LoanModuleApplicationTests - Starting LoanModuleApplicationTests using Java 21.0.10 with PID 20848 (started by KASTURI in E:\Softwares\workspace\loan-module)
+2026-04-18 20:31:41 [main] DEBUG c.d.l.LoanModuleApplicationTests - Running with Spring Boot v3.5.13, Spring v6.2.17
+2026-04-18 20:31:41 [main] INFO  c.d.l.LoanModuleApplicationTests - The following 1 profile is active: "test"
+2026-04-18 20:31:46 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-18 20:31:46 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.45.Final
+2026-04-18 20:31:46 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-18 20:31:47 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-18 20:31:47 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-18 20:31:48 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-18 20:31:50 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-18 20:31:52 [main] INFO  c.d.l.LoanModuleApplicationTests - Started LoanModuleApplicationTests in 11.701 seconds (process running for 13.003)

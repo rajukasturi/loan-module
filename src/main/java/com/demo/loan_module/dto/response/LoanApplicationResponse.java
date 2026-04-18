@@ -1,4 +1,4 @@
-package com.demo.loan_module.dto;
+package com.demo.loan_module.dto.response;
 
 import com.demo.loan_module.enums.LoanStatus;
 import com.demo.loan_module.enums.LoanType;
@@ -11,7 +11,7 @@ import java.util.Date;
  * Contains all relevant information to return to the client.
  */
 @Data
-public class LoanApplicationResponseDTO {
+public class LoanApplicationResponse {
     
     private Long applicationId;
     private String applicationReferenceNumber;
@@ -41,7 +41,4 @@ public class LoanApplicationResponseDTO {
     // Audit information
     private Date createdAt;
     private String message;
-    
-    // Success flag
-    private boolean success;
 }
