@@ -13,7 +13,69 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"fullName\": \"Raju Kasturi\",\r\n    \"panNumber\": \"XZDEF1234F\",\r\n    \"monthlyIncome\": \"25000\",\r\n    \"requestedAmount\": \"375000\",\r\n    \"loanType\": \"HOME_LOAN\",\r\n    \"tenureInMonths\": \"36\",\r\n    \"propertyDetails\": {\r\n        \"propertyValue\": \"800000\",\r\n        \"propertyAddress\": \"Bhiwandi\",\r\n        \"isSelfOccupied\": false\r\n    },\r\n    \"employmentDetails\": {\r\n        \"employmentType\": \"SALARIED\",\r\n        \"companyName\": \"HDFC\",\r\n        \"yearsOfService\": 5\r\n    }\r\n}",
+          "raw": "{\r\n    \"fullName\": \"Raju Kasturi\",\r\n    \"panNumber\": \"XZDEF1234F\",\r\n    \"monthlyIncome\": \"25000\",\r\n    \"requestedAmount\": \"375000\",\r\n    \"tenureInMonths\": \"36\",\r\n    \"propertyDetails\": {\r\n        \"propertyValue\": \"800000\",\r\n        \"propertyAddress\": \"Bhiwandi\",\r\n        \"isSelfOccupied\": false\r\n    },\r\n    \"employmentDetails\": {\r\n        \"employmentType\": \"SALARIED\",\r\n        \"companyName\": \"HDFC\",\r\n        \"yearsOfService\": 5\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/loans/apply",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "loans",
+            "apply"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Gold Loan - 200 Valid Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"fullName\": \"Raju Kasturi\",\r\n    \"panNumber\": \"XZDEA1234F\",\r\n    \"monthlyIncome\": \"25000\",\r\n    \"requestedAmount\": \"100000\",\r\n    \"tenureInMonths\": \"36\",\r\n    \"goldDetails\": {\r\n        \"goldWeightInGrams\": \"10\",\r\n        \"goldCarat\": \"22\",\r\n        \"goldItemDescription\": \"Chain\"\r\n    },\r\n    \"employmentDetails\": {\r\n        \"employmentType\": \"SALARIED\",\r\n        \"companyName\": \"HDFC\",\r\n        \"yearsOfService\": 5\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/loans/apply",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "loans",
+            "apply"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Gold Loan - 400 Invalid Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"fullName\": \"Raju Kasturi\",\r\n    \"panNumber\": \"XZAEA1234F\",\r\n    \"monthlyIncome\": \"25000\",\r\n    \"requestedAmount\": \"300000\",\r\n    \"tenureInMonths\": \"36\",\r\n    \"goldDetails\": {\r\n        \"goldWeightInGrams\": \"10\",\r\n        \"goldCarat\": \"22\",\r\n        \"goldItemDescription\": \"Chain\"\r\n    },\r\n    \"employmentDetails\": {\r\n        \"employmentType\": \"SALARIED\",\r\n        \"companyName\": \"HDFC\",\r\n        \"yearsOfService\": 5\r\n    }\r\n}",
           "options": {
             "raw": {
               "language": "json"
