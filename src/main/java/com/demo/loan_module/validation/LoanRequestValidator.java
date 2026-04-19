@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class LoanRequestValidator {
-    
+
     // Minimum acceptable values for validation
     private static final int MIN_NAME_LENGTH = 2;
     private static final int MAX_NAME_LENGTH = 100;
@@ -19,9 +19,10 @@ public class LoanRequestValidator {
     private static final double MIN_MONTHLY_INCOME = 10000.0;
     private static final double MIN_REQUESTED_AMOUNT = 1000.0;
     private static final double MAX_REQUESTED_AMOUNT = 10000000.0; // 1 crore
-    
+
     /**
      * Validates a loan request.
+     *
      * @param request The loan request to validate
      * @throws InvalidLoanRequestException if validation fails
      */
@@ -29,13 +30,13 @@ public class LoanRequestValidator {
         if (request == null) {
             throw new InvalidLoanRequestException("Loan request cannot be null");
         }
-        
+
         validateFullName(request.getFullName());
         validatePanNumber(request.getPanNumber());
         validateMonthlyIncome(request.getMonthlyIncome());
         validateRequestedAmount(request.getRequestedAmount());
     }
-    
+
     private void validateFullName(String fullName) {
         if (fullName == null || fullName.trim().isEmpty()) {
             throw new InvalidLoanRequestException("Full name is required");
@@ -49,7 +50,7 @@ public class LoanRequestValidator {
                     "Full name must not exceed %d characters", MAX_NAME_LENGTH);
         }
     }
-    
+
     private void validatePanNumber(String panNumber) {
         if (panNumber == null || panNumber.trim().isEmpty()) {
             throw new InvalidLoanRequestException("PAN number is required");
@@ -64,7 +65,7 @@ public class LoanRequestValidator {
                     "PAN number must be in valid format (e.g., ABCDE1234F)");
         }
     }
-    
+
     private void validateMonthlyIncome(Double monthlyIncome) {
         if (monthlyIncome == null) {
             throw new InvalidLoanRequestException("Monthly income is required");
@@ -74,7 +75,7 @@ public class LoanRequestValidator {
                     "Monthly income must be at least ₹%.2f", MIN_MONTHLY_INCOME);
         }
     }
-    
+
     private void validateRequestedAmount(Double requestedAmount) {
         if (requestedAmount == null) {
             throw new InvalidLoanRequestException("Requested amount is required");

@@ -1,6 +1,5 @@
 package com.demo.loan_module.service.impl;
 
-import com.demo.loan_module.enums.LoanType;
 import com.demo.loan_module.model.EligibilityResponse;
 import com.demo.loan_module.service.CreditBureauService;
 import org.slf4j.Logger;
@@ -14,55 +13,55 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CibilServiceImpl implements CreditBureauService {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(CibilServiceImpl.class);
-    
+
     // CIBIL score thresholds
     private static final int EXCELLENT_SCORE = 800;
     private static final int GOOD_SCORE = 750;
     private static final int FAIR_SCORE = 700;
     private static final int MIN_ELIGIBLE_SCORE = 650;
-    
+
     @Override
     public EligibilityResponse checkEligibility(String panNumber, Double monthlyIncome) {
         logger.info("Checking CIBIL eligibility for PAN: {}", maskPan(panNumber));
-        
+
         // Generate deterministic mock score based on PAN hash
         int cibilScore = calculateMockCibilScore(panNumber);
-        
+
         EligibilityResponse response = new EligibilityResponse();
         response.setCibilScore(cibilScore);
-        
+
         // Determine eligibility based on score
         if (cibilScore >= MIN_ELIGIBLE_SCORE) {
             double eligibleAmount = calculateEligibleAmount(cibilScore, monthlyIncome);
             double rateOfInterest = calculateRateOfInterest(cibilScore);
-            
+
             response.setEligibleAmount(eligibleAmount);
             response.setRateOfInterest(rateOfInterest);
             response.setEligible(true);
-            
-            logger.info("Applicant eligible - Score: {}, Amount: ₹{}, Rate: {}%", 
-                       cibilScore, eligibleAmount, rateOfInterest);
+
+            logger.info("Applicant eligible - Score: {}, Amount: ₹{}, Rate: {}%",
+                    cibilScore, eligibleAmount, rateOfInterest);
         } else {
             response.setEligibleAmount(0.0);
             response.setRateOfInterest(0.0);
             response.setEligible(false);
-            
+
             logger.warn("Applicant not eligible - Score: {}", cibilScore);
         }
-        
+
         return response;
     }
-    
+
     @Override
     public EligibilityResponse checkEligibility(String panNumber, Double monthlyIncome,
-                                                  Double loanAmount, Integer tenureInMonths) {
+                                                Double loanAmount, Integer tenureInMonths) {
         logger.info("Checking CIBIL eligibility with loan details - PAN: {}, Amount: ₹{}, Tenure: {} months",
-                   maskPan(panNumber), loanAmount, tenureInMonths);
-        
+                maskPan(panNumber), loanAmount, tenureInMonths);
+
         EligibilityResponse response = checkEligibility(panNumber, monthlyIncome);
-        
+
         // For home loans, adjust eligible amount based on tenure
         // Longer tenure can reduce eligible amount
         if (tenureInMonths != null && tenureInMonths > 360) {
@@ -70,10 +69,10 @@ public class CibilServiceImpl implements CreditBureauService {
             double adjustedAmount = response.getEligibleAmount() * 0.9;
             response.setEligibleAmount(adjustedAmount);
         }
-        
+
         return response;
     }
-    
+
     /**
      * Calculates mock CIBIL score from PAN number.
      * Generates a deterministic score between 300-900.
@@ -86,7 +85,7 @@ public class CibilServiceImpl implements CreditBureauService {
         int hash = Math.abs(panNumber.hashCode());
         return 300 + (hash % 601); // 300-900 range
     }
-    
+
     /**
      * Calculates eligible amount based on CIBIL score and income.
      */
@@ -94,7 +93,7 @@ public class CibilServiceImpl implements CreditBureauService {
         if (monthlyIncome == null || monthlyIncome <= 0) {
             return 0.0;
         }
-        
+
         double multiplier;
         if (cibilScore >= EXCELLENT_SCORE) {
             multiplier = 15.0; // 15x monthly income
@@ -105,10 +104,10 @@ public class CibilServiceImpl implements CreditBureauService {
         } else {
             multiplier = 8.0; // 8x for scores between 650-699
         }
-        
+
         return monthlyIncome * multiplier;
     }
-    
+
     /**
      * Calculates rate of interest based on CIBIL score.
      */
@@ -125,7 +124,7 @@ public class CibilServiceImpl implements CreditBureauService {
             return 0.0;
         }
     }
-    
+
     /**
      * Masks PAN number for logging (show only first and last character).
      */

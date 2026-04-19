@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Data
 public class LoanApplicationResponseDTO {
-    
+
     private Long applicationId;
     private String applicationReferenceNumber;
     private String fullName;
@@ -21,27 +21,27 @@ public class LoanApplicationResponseDTO {
     private Double monthlyIncome;
     private Double requestedAmount;
     private Integer tenureInMonths;
-    
+
     // Credit bureau details
     private Integer cibilScore;
     private Double eligibleAmount;
     private Double rateOfInterest;
-    
+
     // Approval details
     private LoanStatus status;
     private Double sanctionedAmount;
     private Double processingFee;
     private Double monthlyEmi;
-    
+
     // Property details (for home loans)
     private Double propertyValue;
     private String propertyAddress;
     private Boolean isSelfOccupied;
-    
+
     // Audit information
     private Date createdAt;
     private String message;
-    
+
     // Success flag
     private boolean success;
 }

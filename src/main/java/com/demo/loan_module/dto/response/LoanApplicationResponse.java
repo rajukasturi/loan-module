@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Data
 public class LoanApplicationResponse {
-    
+
     private Long applicationId;
     private String applicationReferenceNumber;
     private String fullName;
@@ -21,23 +21,28 @@ public class LoanApplicationResponse {
     private Double monthlyIncome;
     private Double requestedAmount;
     private Integer tenureInMonths;
-    
+
     // Credit bureau details
     private Integer cibilScore;
     private Double eligibleAmount;
     private Double rateOfInterest;
-    
+
     // Approval details
     private LoanStatus status;
     private Double sanctionedAmount;
     private Double processingFee;
     private Double monthlyEmi;
-    
+
     // Property details (for home loans)
     private Double propertyValue;
     private String propertyAddress;
     private Boolean isSelfOccupied;
-    
+
+    // Gold details (for gold loans)
+    private Double goldWeightInGrams;
+    private Integer goldCarat;
+    private String goldItemDescription;
+
     // Audit information
     private Date createdAt;
     private String message;

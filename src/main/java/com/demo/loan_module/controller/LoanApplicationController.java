@@ -1,6 +1,7 @@
 package com.demo.loan_module.controller;
 
 import com.demo.loan_module.dto.request.CreateLoanApplicationRequest;
+import com.demo.loan_module.dto.response.ApiResponse;
 import com.demo.loan_module.dto.response.LoanApplicationResponse;
 import com.demo.loan_module.entity.LoanApplication;
 import com.demo.loan_module.service.LoanApplicationService;
@@ -8,7 +9,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -47,30 +47,30 @@ public class LoanApplicationController {
      */
     @PostMapping("/apply")
     @Operation(
-        summary = "Create a new loan application",
-        description = "Submits a new loan application and returns the application details",
-        responses = {
-            @ApiResponse(responseCode = "201", description = "Loan application created successfully",
-                    content = @Content(schema = @Schema(implementation = com.demo.loan_module.dto.response.ApiResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid request or eligibility failed"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
-        }
+            summary = "Create a new loan application",
+            description = "Submits a new loan application and returns the application details",
+            responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Loan application created successfully",
+                            content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Invalid request or eligibility failed"),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+            }
     )
-    public ResponseEntity<com.demo.loan_module.dto.response.ApiResponse<LoanApplicationResponse>> applyForLoan(
+    public ResponseEntity<ApiResponse<LoanApplicationResponse>> applyForLoan(
             @Valid @RequestBody CreateLoanApplicationRequest request) {
 
         logger.info("Received loan application request for: {}", request.getFullName());
 
         LoanApplicationResponse response = loanApplicationService.createLoanApplication(request);
 
-        com.demo.loan_module.dto.response.ApiResponse<LoanApplicationResponse> apiResponse = 
-            com.demo.loan_module.dto.response.ApiResponse.success(
-            response,
-            "Loan application submitted successfully"
-        );
+        ApiResponse<LoanApplicationResponse> apiResponse =
+                ApiResponse.success(
+                        response,
+                        "Loan application submitted successfully"
+                );
 
         logger.info("Loan application created - ID: {}, Reference: {}",
-                   response.getApplicationId(), response.getApplicationReferenceNumber());
+                response.getApplicationId(), response.getApplicationReferenceNumber());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
     }
@@ -83,16 +83,16 @@ public class LoanApplicationController {
      */
     @GetMapping("/{id}")
     @Operation(
-        summary = "Get loan application by ID",
-        description = "Retrieves a loan application by its unique identifier",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Loan application found",
-                    content = @Content(schema = @Schema(implementation = com.demo.loan_module.dto.response.ApiResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Loan application not found"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
-        }
+            summary = "Get loan application by ID",
+            description = "Retrieves a loan application by its unique identifier",
+            responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Loan application found",
+                            content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Loan application not found"),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+            }
     )
-    public ResponseEntity<com.demo.loan_module.dto.response.ApiResponse<LoanApplicationResponse>> getLoanApplication(
+    public ResponseEntity<ApiResponse<LoanApplicationResponse>> getLoanApplication(
             @Parameter(description = "The ID of the loan application")
             @PathVariable Long id) {
 
@@ -102,18 +102,18 @@ public class LoanApplicationController {
 
         if (application.isPresent()) {
             LoanApplicationResponse response = mapToResponse(application.get());
-            com.demo.loan_module.dto.response.ApiResponse<LoanApplicationResponse> apiResponse = 
-                com.demo.loan_module.dto.response.ApiResponse.success(
-                response,
-                "Loan application retrieved successfully"
-            );
+            ApiResponse<LoanApplicationResponse> apiResponse =
+                    ApiResponse.success(
+                            response,
+                            "Loan application retrieved successfully"
+                    );
             return ResponseEntity.ok(apiResponse);
         } else {
-            com.demo.loan_module.dto.response.ApiResponse<LoanApplicationResponse> apiResponse = 
-                com.demo.loan_module.dto.response.ApiResponse.error(
-                "Loan application not found with id: " + id,
-                "404"
-            );
+            ApiResponse<LoanApplicationResponse> apiResponse =
+                    ApiResponse.error(
+                            "Loan application not found with id: " + id,
+                            "404"
+                    );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
         }
     }
@@ -126,16 +126,16 @@ public class LoanApplicationController {
      */
     @GetMapping("/pan/{panNumber}")
     @Operation(
-        summary = "Get loan applications by PAN number",
-        description = "Retrieves all loan applications associated with a PAN number",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Loan applications found",
-                    content = @Content(schema = @Schema(implementation = com.demo.loan_module.dto.response.ApiResponse.class))),
-            @ApiResponse(responseCode = "404", description = "No loan applications found"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
-        }
+            summary = "Get loan applications by PAN number",
+            description = "Retrieves all loan applications associated with a PAN number",
+            responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Loan applications found",
+                            content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "No loan applications found"),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+            }
     )
-    public ResponseEntity<com.demo.loan_module.dto.response.ApiResponse<List<LoanApplicationResponse>>> getLoanApplicationsByPan(
+    public ResponseEntity<ApiResponse<List<LoanApplicationResponse>>> getLoanApplicationsByPan(
             @Parameter(description = "The PAN number to search for")
             @PathVariable String panNumber) {
 
@@ -144,14 +144,14 @@ public class LoanApplicationController {
         List<LoanApplication> applications = loanApplicationService.getLoanApplicationsByPanNumber(panNumber);
 
         List<LoanApplicationResponse> responses = applications.stream()
-            .map(this::mapToResponse)
-            .collect(Collectors.toList());
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
 
-        com.demo.loan_module.dto.response.ApiResponse<List<LoanApplicationResponse>> apiResponse = 
-            com.demo.loan_module.dto.response.ApiResponse.success(
-            responses,
-            "Found " + responses.size() + " loan application(s) for PAN: " + panNumber
-        );
+        ApiResponse<List<LoanApplicationResponse>> apiResponse =
+                ApiResponse.success(
+                        responses,
+                        "Found " + responses.size() + " loan application(s) for PAN: " + panNumber
+                );
 
         return ResponseEntity.ok(apiResponse);
     }
@@ -163,28 +163,28 @@ public class LoanApplicationController {
      */
     @GetMapping
     @Operation(
-        summary = "Get all loan applications",
-        description = "Retrieves all loan applications (admin access recommended)",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Loan applications retrieved",
-                    content = @Content(schema = @Schema(implementation = com.demo.loan_module.dto.response.ApiResponse.class))),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
-        }
+            summary = "Get all loan applications",
+            description = "Retrieves all loan applications (admin access recommended)",
+            responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Loan applications retrieved",
+                            content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+            }
     )
-    public ResponseEntity<com.demo.loan_module.dto.response.ApiResponse<List<LoanApplicationResponse>>> getAllLoanApplications() {
+    public ResponseEntity<ApiResponse<List<LoanApplicationResponse>>> getAllLoanApplications() {
         logger.debug("Retrieving all loan applications");
 
         List<LoanApplication> applications = loanApplicationService.getAllLoanApplications();
 
         List<LoanApplicationResponse> responses = applications.stream()
-            .map(this::mapToResponse)
-            .collect(Collectors.toList());
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
 
-        com.demo.loan_module.dto.response.ApiResponse<List<LoanApplicationResponse>> apiResponse = 
-            com.demo.loan_module.dto.response.ApiResponse.success(
-            responses,
-            "Retrieved " + responses.size() + " loan application(s)"
-        );
+        ApiResponse<List<LoanApplicationResponse>> apiResponse =
+                ApiResponse.success(
+                        responses,
+                        "Retrieved " + responses.size() + " loan application(s)"
+                );
 
         return ResponseEntity.ok(apiResponse);
     }
@@ -197,16 +197,16 @@ public class LoanApplicationController {
      */
     @GetMapping("/status/{status}")
     @Operation(
-        summary = "Get loan applications by status",
-        description = "Retrieves all loan applications with a specific status",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Loan applications found",
-                    content = @Content(schema = @Schema(implementation = com.demo.loan_module.dto.response.ApiResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid status value"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
-        }
+            summary = "Get loan applications by status",
+            description = "Retrieves all loan applications with a specific status",
+            responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Loan applications found",
+                            content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Invalid status value"),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+            }
     )
-    public ResponseEntity<com.demo.loan_module.dto.response.ApiResponse<List<LoanApplicationResponse>>> getLoanApplicationsByStatus(
+    public ResponseEntity<ApiResponse<List<LoanApplicationResponse>>> getLoanApplicationsByStatus(
             @Parameter(description = "The status to filter by (APPROVED, REJECTED, PENDING, etc.)")
             @PathVariable String status) {
 
@@ -215,14 +215,14 @@ public class LoanApplicationController {
         List<LoanApplication> applications = loanApplicationService.getLoanApplicationsByStatus(status);
 
         List<LoanApplicationResponse> responses = applications.stream()
-            .map(this::mapToResponse)
-            .collect(Collectors.toList());
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
 
-        com.demo.loan_module.dto.response.ApiResponse<List<LoanApplicationResponse>> apiResponse = 
-            com.demo.loan_module.dto.response.ApiResponse.success(
-            responses,
-            "Found " + responses.size() + " loan application(s) with status: " + status
-        );
+        ApiResponse<List<LoanApplicationResponse>> apiResponse =
+                ApiResponse.success(
+                        responses,
+                        "Found " + responses.size() + " loan application(s) with status: " + status
+                );
 
         return ResponseEntity.ok(apiResponse);
     }
@@ -230,22 +230,22 @@ public class LoanApplicationController {
     /**
      * Updates a loan application.
      *
-     * @param id The application ID
+     * @param id      The application ID
      * @param request The updated loan application data
      * @return ResponseEntity containing the updated loan application response
      */
     @PutMapping("/{id}")
     @Operation(
-        summary = "Update loan application",
-        description = "Updates an existing loan application",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Loan application updated successfully",
-                    content = @Content(schema = @Schema(implementation = com.demo.loan_module.dto.response.ApiResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Loan application not found"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
-        }
+            summary = "Update loan application",
+            description = "Updates an existing loan application",
+            responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Loan application updated successfully",
+                            content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Loan application not found"),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+            }
     )
-    public ResponseEntity<com.demo.loan_module.dto.response.ApiResponse<LoanApplicationResponse>> updateLoanApplication(
+    public ResponseEntity<ApiResponse<LoanApplicationResponse>> updateLoanApplication(
             @Parameter(description = "The ID of the loan application to update")
             @PathVariable Long id,
             @Valid @RequestBody CreateLoanApplicationRequest request) {
@@ -254,11 +254,11 @@ public class LoanApplicationController {
 
         Optional<LoanApplication> existingApp = loanApplicationService.getLoanApplicationById(id);
         if (existingApp.isEmpty()) {
-            com.demo.loan_module.dto.response.ApiResponse<LoanApplicationResponse> apiResponse = 
-                com.demo.loan_module.dto.response.ApiResponse.error(
-                "Loan application not found with id: " + id,
-                "404"
-            );
+            ApiResponse<LoanApplicationResponse> apiResponse =
+                    ApiResponse.error(
+                            "Loan application not found with id: " + id,
+                            "404"
+                    );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
         }
 
@@ -279,11 +279,11 @@ public class LoanApplicationController {
         LoanApplication updated = loanApplicationService.updateLoanApplication(id, application);
 
         LoanApplicationResponse response = mapToResponse(updated);
-        com.demo.loan_module.dto.response.ApiResponse<LoanApplicationResponse> apiResponse = 
-            com.demo.loan_module.dto.response.ApiResponse.success(
-            response,
-            "Loan application updated successfully"
-        );
+        ApiResponse<LoanApplicationResponse> apiResponse =
+                ApiResponse.success(
+                        response,
+                        "Loan application updated successfully"
+                );
 
         logger.info("Loan application updated - ID: {}", id);
 
@@ -298,15 +298,15 @@ public class LoanApplicationController {
      */
     @DeleteMapping("/{id}")
     @Operation(
-        summary = "Delete loan application",
-        description = "Deletes a loan application by its ID",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Loan application deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Loan application not found"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
-        }
+            summary = "Delete loan application",
+            description = "Deletes a loan application by its ID",
+            responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Loan application deleted successfully"),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Loan application not found"),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Internal server error")
+            }
     )
-    public ResponseEntity<com.demo.loan_module.dto.response.ApiResponse<Void>> deleteLoanApplication(
+    public ResponseEntity<ApiResponse<Void>> deleteLoanApplication(
             @Parameter(description = "The ID of the loan application to delete")
             @PathVariable Long id) {
 
@@ -315,21 +315,21 @@ public class LoanApplicationController {
         try {
             loanApplicationService.deleteLoanApplication(id);
 
-            com.demo.loan_module.dto.response.ApiResponse<Void> apiResponse = 
-                com.demo.loan_module.dto.response.ApiResponse.success(
-                null,
-                "Loan application deleted successfully"
-            );
+            ApiResponse<Void> apiResponse =
+                    ApiResponse.success(
+                            null,
+                            "Loan application deleted successfully"
+                    );
 
             logger.info("Loan application deleted - ID: {}", id);
 
             return ResponseEntity.ok(apiResponse);
         } catch (Exception e) {
-            com.demo.loan_module.dto.response.ApiResponse<Void> apiResponse = 
-                com.demo.loan_module.dto.response.ApiResponse.error(
-                e.getMessage(),
-                "404"
-            );
+            ApiResponse<Void> apiResponse =
+                    ApiResponse.error(
+                            e.getMessage(),
+                            "404"
+                    );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
         }
     }

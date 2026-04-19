@@ -5,40 +5,40 @@ package com.demo.loan_module.enums;
  * Extensible for future loan products.
  */
 public enum LoanType {
-    
-    /** Home loan for purchasing residential property */
+
+    /**
+     * Home loan for purchasing residential property
+     */
     HOME_LOAN("HOME_LOAN", "Home Loan"),
-    
-    /** Personal loan for individual needs */
+
+    /**
+     * Personal loan for individual needs
+     */
     PERSONAL_LOAN("PERSONAL_LOAN", "Personal Loan"),
-    
-    /** Car loan for vehicle financing */
+
+    /**
+     * Car loan for vehicle financing
+     */
     CAR_LOAN("CAR_LOAN", "Car Loan"),
-    
-    /** Education loan for academic purposes */
-    EDUCATION_LOAN("EDUCATION_LOAN", "Education Loan");
-    
+
+    /**
+     * Education loan for academic purposes
+     */
+    EDUCATION_LOAN("EDUCATION_LOAN", "Education Loan"),
+
+    /**
+     * Gold loan secured by gold ornaments
+     */
+    GOLD_LOAN("GOLD_LOAN", "Gold Loan");
+
     private final String code;
     private final String displayName;
-    
+
     LoanType(String code, String displayName) {
         this.code = code;
         this.displayName = displayName;
     }
-    
-    public String getCode() {
-        return code;
-    }
-    
-    public String getDisplayName() {
-        return displayName;
-    }
-    
-    @Override
-    public String toString() {
-        return code;
-    }
-    
+
     /**
      * Factory method to get LoanType from code.
      */
@@ -50,11 +50,31 @@ public enum LoanType {
         }
         throw new IllegalArgumentException("Unknown loan type code: " + code);
     }
-    
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    @Override
+    public String toString() {
+        return code;
+    }
+
     /**
      * Check if the loan type is a home loan.
      */
     public boolean isHomeLoan() {
         return this == HOME_LOAN;
+    }
+
+    /**
+     * Check if the loan type is a gold loan.
+     */
+    public boolean isGoldLoan() {
+        return this == GOLD_LOAN;
     }
 }
