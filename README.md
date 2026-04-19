@@ -46,7 +46,8 @@ A comprehensive RESTful API for managing loan applications with built-in eligibi
 | Feature | Description |
 |---------|-------------|
 | **Loan Application Management** | Create, retrieve, update, and delete loan applications |
-| **Multiple Loan Types** | Support for HOME_LOAN, PERSONAL_LOAN, CAR_LOAN, EDUCATION_LOAN |
+| **Multiple Loan Types** | Support for HOME_LOAN, PERSONAL_LOAN, CAR_LOAN, EDUCATION_LOAN, GOLD_LOAN |
+| **Gold Loan Support** | Secured loans against gold with weight, carat, and item description validation |
 | **Credit Score Integration** | CIBIL score validation with configurable thresholds |
 | **Eligibility Calculation** | Automatic eligibility determination based on income, CIBIL, and loan type |
 | **EMI Calculator** | Monthly EMI calculation with rate of interest |
@@ -346,7 +347,7 @@ curl -X POST http://localhost:8080/api/v1/loans/apply \
 | `monthlyIncome` | Yes | 10000 | - | - | Configured via `loan.application.min-income` |
 | `requestedAmount` | Yes | 1000 | 10000000 | - | Configured via `loan.application.min-amount`, `loan.application.max-amount` |
 | `tenureInMonths` | Yes | 1 | 360 | - | Configured via `loan.application.max-tenure-months` |
-| `loanType` | Yes | - | - | Enum | HOME_LOAN, PERSONAL_LOAN, CAR_LOAN, EDUCATION_LOAN |
+| `loanType` | Yes | - | - | Enum | HOME_LOAN, PERSONAL_LOAN, CAR_LOAN, EDUCATION_LOAN, GOLD_LOAN |
 
 ### Eligibility Rules
 
@@ -356,6 +357,8 @@ curl -X POST http://localhost:8080/api/v1/loans/apply \
 3. Loan Amount within Min/Max limits
 4. Tenure within Max allowed months
 5. Home Loan: propertyValue >= requestedAmount * 1.5
+6. Gold Loan: goldCarat >= 18, goldWeightInGrams > 0, tenureInMonths <= 60
+7. Gold Loan: loan amount per gram must be within LTV ratio (max 80% of gold value)
 ```
 
 ---
@@ -615,7 +618,7 @@ A Postman collection is included for testing the API:
 
 ### Collection Includes
 
-- Create Loan Application
+- Create Loan Application (Home Loan, Personal Loan, Car Loan, Education Loan, Gold Loan)
 - Get Loan Application by ID
 - Get All Loan Applications
 - Get Applications by PAN
@@ -623,6 +626,7 @@ A Postman collection is included for testing the API:
 - Update Loan Application
 - Delete Loan Application
 - Error scenarios and edge cases
+- Gold Loan specific test cases with gold weight, carat, and item description
 
 ---
 

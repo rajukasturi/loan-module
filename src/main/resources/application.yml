@@ -70,6 +70,7 @@ loan:
     personal-loan: 0.02
     car-loan: 0.015
     education-loan: 0.01
+    gold-loan: 0.005
 
 # H2 Database Configuration for production profile
 ---
